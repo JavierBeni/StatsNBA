@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavbarC } from '../../components/Navbar/NavbarC'
+// import { NavbarC } from '../../components/Navbar/NavbarC'
 // import Form from 'react-bootstrap/Form'
 // import Button from 'react-bootstrap/Button'
 // import { auth } from "../../firebase";

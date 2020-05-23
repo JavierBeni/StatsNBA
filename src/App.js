@@ -1,26 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import './App.scss';
+import { Home } from './pages/Home'
+import { Players } from './pages/Players/Players'
+import { Forms } from './components/Forms/Forms'
+import { Title } from './components/Title/Title'
 
 function App() {
   return (
+    <Router>
+      <Switch>
+        <Route exact path='/' component={Log} />
+        {/* <Route path='/detail/:movieId' component={NavbarC} /> */}
+        <Route exact path='/home' component={Home} />
+        <Route exact path='/home/games' component={ Players } />
+        <Route exact path='/home/players' component={ Players } />
+        <Route exact path='/home/teams' component={ Players } />
+        {/* <Route component={NotFound} /> */}
+      </Switch>
+    </Router>
+  );
+
+}
+
+function Log() {
+  return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Title></Title>
+      <Forms></Forms>
     </div>
   );
 }
+
 
 export default App;

@@ -1,0 +1,28 @@
+#FormSign {
+    margin: auto;
+    width: 30%;
+    background-color: rgba(0, 40, 80, 0.9);
+    padding: 2%;
+    color: white;
+    border-radius: 25px;
+}
+
+.sign_in {
+    text-align: center;
+    font-weight: bold;
+}
+
+.footer {
+    margin-right: 2%;
+    display: inline-block;
+    justify-content: center;
+}
+
+#submit {
+    display: flex;
+    justify-content: space-between;
+}
+
+#sign, #diff_pass{
+    color: red;
+}

@@ -1,0 +1,27 @@
+.element {
+    margin: 1%;
+}
+
+@mixin center_order {
+    display: flex;
+    justify-content: space-between;
+    margin: 5%;
+}
+
+.title_team {
+    @include center_order;
+}
+
+.sub_team {
+    @include center_order;
+}
+
+.info_team {
+    @include center_order;
+}
+
+.img_team {
+    height: 25%;
+    width: 25%;
+}
+

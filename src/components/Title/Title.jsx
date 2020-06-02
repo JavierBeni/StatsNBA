@@ -1,14 +1,15 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './Title.scss';
 import logo from '../../assets/img/nba-stats-logo.png';
 
-export class Title extends Component {
+function Title(props) {
 
-    render() {
-        return (
-            <div className="back_img">
-                <img src={logo} alt={logo} ></img>
-            </div>
-        )
-    }
+    return (
+        <div className="back_img">
+            <img className="title_img" src={logo} alt={logo} ></img>
+        </div>
+    )
+
 }
+
+export default Title;

@@ -1,19 +1,13 @@
 .cardDeck {
-    // height: 50vh;
-    // width: 100%;
     padding: 2%;
 }
 
-// .card {
-//     padding: 2%;
-//     max-height: 90vh;
-// }
+.card {
+    align-items: center;
+    text-align: center;
+}
 
 .imageCard {
     max-height: 80%;
     max-width: 80%;
-}
-
-.bodyCard {
-
 }

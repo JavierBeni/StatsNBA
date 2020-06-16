@@ -1,43 +1,77 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+
 import NavbarC from '../../components/Navbar/NavbarC'
 import Loading from '../../components/Loading/Loading'
-// import Form from 'react-bootstrap/Form'
-// import Button from 'react-bootstrap/Button'
+import BackButton from '../../components/BackButton/BackButton'
+
+import Form from 'react-bootstrap/Form'
+import Table from 'react-bootstrap/Table'
+import history from '../../history.js';
+import Button from 'react-bootstrap/Button'
+
 import { auth } from "../../firebase";
+import { api_host, api_key, api_url, api_n_per_page } from '../../ApiResources'
+
+import './elements.scss';
 
 export class Players extends React.Component {
 
     constructor() {
         super();
         this._isMounted = false;
+        this.players = [];
+        this.searchPlayers = this.searchPlayers.bind(this);
+        this.playerDetails = this.playerDetails.bind(this);
+
         this.state = {
-            loading: true,
             authenticated: false,
+            loading: true,
+            players: [],
             redirect: ""
         };
     }
 
+    //If name longer than 4 characters, allow search players.
+    searchPlayers(event) {
+        event.preventDefault();
 
+        if (event.target.player.value.length < 4)
+            alert("Name must have at least 4 characters");
+        else {
+            this._isMounted && this.setState({ loading: true, authenticated: false });
+            this.players = [];
 
-    getPlayers(page) {
+            for (let index = 1; index <= 2; index++)
+                this.getPlayers(index.toString(), event.target.player.value);
+        }
+    }
+
+    //Redict to stats of player.
+    playerDetails(id) {
+        history.push('/home/players/detail/' + id);
+    }
+
+    //Get player by name.
+    getPlayers(page, name) {
         let unirest = require("unirest");
         let currentComponent = this;
-        unirest("GET", "https://free-nba.p.rapidapi.com/players")
+        unirest("GET", api_url + "players")
             .query({
-
                 "page": page,
-                "per_page": "100"
+                "per_page": api_n_per_page,
+                "search": name
             })
             .headers({
-                "x-rapidapi-host": "free-nba.p.rapidapi.com",
-                "x-rapidapi-key": "57f3d387bcmshd9fb6c4a083a488p1de507jsn208254e5e0cf"
+                "x-rapidapi-host": api_host,
+                "x-rapidapi-key": api_key
             })
             .end(function (res) {
                 if (res.error) throw new Error(res.error);
-                console.log(res.body.meta);
+
+                currentComponent.players = currentComponent.players.concat(res.body.data)
                 if (res.body.meta.next_page === null)
-                currentComponent._isMounted && currentComponent.setState({ loading: false, authenticated: true });
+                    currentComponent._isMounted && currentComponent.setState({ loading: false, authenticated: true, players: currentComponent.players });
             });
     }
 
@@ -45,15 +79,9 @@ export class Players extends React.Component {
         this._isMounted = true;
         auth.onAuthStateChanged((user) => {
 
-            if (user) {
-
-                for (let index = 1; index < 34; index++) {
-                    this.getPlayers(index.toString());
-                }
-
-            } else {
+            (user) ?
+                this._isMounted && this.setState({ loading: false, authenticated: true }) :
                 this._isMounted && this.setState({ loading: false, authenticated: false });
-            }
         });
 
     }
@@ -61,15 +89,55 @@ export class Players extends React.Component {
     componentWillUnmount() {
         this._isMounted = false;
         console.log('no mounted');
-        this._isMounted && this.setState({ loading: true, authenticated: false });
+        this._isMounted && this.setState({ authenticated: false, loading: true });
     }
 
     render() {
+
+        let rows_players = [];
+        if (this.state.players)
+            rows_players = this.state.players.map((player) =>
+                <tr key={player.id} onClick={(e) => this.playerDetails(player.id)}>
+                    <td>{player.first_name}</td>
+                    <td>{player.last_name}</td>
+                    <td>{player.position}</td>
+                    <td>{player.height_feet}</td>
+                    <td>{player.team.full_name}</td>
+                </tr>);
+
+
         if (this.state.authenticated)
             return (
-                <div>
+                <div className="elements">
                     <NavbarC></NavbarC>
-                    <p className="elements">Players</p>
+                    <div className="elements_body">
+                        <Form className="search_player" onSubmit={this.searchPlayers}>
+                            <h2 className="small_title">Players</h2>
+                            <Form.Control className="mr-sm-2" name="player" placeholder="Search" type="text" />
+                            <Button type="submit">Submit form</Button>
+                        </Form>
+                        <div>
+                            <Table striped bordered hover variant="dark">
+                                <thead>
+                                    <tr>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Position</th>
+                                        <th>Height feet</th>
+                                        <th>Team</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {rows_players}
+                                </tbody>
+                            </Table>
+                            <div>
+                                <p>Number of resutls: {rows_players.length}</p>
+                                <p>Leyend of the position: C=center; G=guard; F=forward</p>
+                            </div>
+                        </div>
+                        <BackButton></BackButton>
+                    </div>
                 </div>
             );
         else
@@ -82,9 +150,5 @@ export class Players extends React.Component {
                 )
             else
                 return <Redirect to='/' />;
-
-
-
-
     }
 }

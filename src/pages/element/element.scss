@@ -1,27 +1,37 @@
+@import "../../App.scss";
+
 .element {
-    margin: 1%;
+    @include background_image;
 }
 
-@mixin center_order {
-    display: flex;
-    justify-content: space-between;
-    margin: 5%;
+.element_body {
+    padding: 1%;
 }
 
-.title_team {
+.body_element,
+.title_element,
+.info_element {
     @include center_order;
 }
 
-.sub_team {
-    @include center_order;
+.text_element {
+    width: 70%;
 }
 
-.info_team {
+.sub_element {
     @include center_order;
+    white-space: nowrap;
 }
 
 .img_team {
-    height: 25%;
-    width: 25%;
+    height: 20%;
+    width: 20%;
 }
 
+//only in player
+.select {
+    background-color: mediumblue;
+    color: white;
+    min-width: 110px;
+    max-width: 10%;
+}

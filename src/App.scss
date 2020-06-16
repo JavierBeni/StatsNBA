@@ -1,23 +1,18 @@
 @import "~bootstrap/scss/bootstrap";
 
-.App {
+@mixin background_image {
   background-image: url("assets/img/ball-statistics-alpha.png");
   background-size: 100px 75px;
   min-height: 100vh;
-  padding: 2%;
 }
 
-// @keyframes App-logo-spin {
-//   from {
-//     transform: rotate(0deg);
-//   }
-//   to {
-//     transform: rotate(360deg);
-//   }
-// }
+@mixin center_order {
+  display: flex;
+  justify-content: space-between;
+  margin: 2%;
+}
 
-// @media (prefers-reduced-motion: no-preference) {
-//   .App-logo {
-//     animation: App-logo-spin infinite 20s linear;
-//   }
-// }
+.App {
+  @include background_image;
+  padding: 2%;
+}

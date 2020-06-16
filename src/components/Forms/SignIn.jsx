@@ -1,8 +1,8 @@
 import React from 'react'
 import Form from 'react-bootstrap/Form'
 
+//Part of form in case of sign in.
 function SignIn(props) {
-
     return (
         <Form.Group>
             <Form.Group className="sign_in">

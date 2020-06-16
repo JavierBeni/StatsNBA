@@ -1,2 +1,6 @@
+@import '../App.scss';
 
+.home{
+    @include background_image;
+}
 

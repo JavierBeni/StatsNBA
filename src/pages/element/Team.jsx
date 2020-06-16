@@ -1,6 +1,8 @@
 import React from 'react'
-import NavbarC from '../../components/Navbar/NavbarC'
 import { Redirect } from 'react-router-dom';
+
+import NavbarC from '../../components/Navbar/NavbarC'
+import BackButton from '../../components/BackButton/BackButton'
 
 import { auth } from "../../firebase";
 
@@ -25,9 +27,8 @@ export class Team extends React.Component {
         this._isMounted = true;
         auth.onAuthStateChanged((user) => {
 
-            if (user) {
-                this._isMounted && this.setState({ loading: false, authenticated: true });
-            } else
+            (user) ?
+                this._isMounted && this.setState({ loading: false, authenticated: true }) :
                 this._isMounted && this.setState({ loading: false, authenticated: false });
         });
     }
@@ -43,27 +44,29 @@ export class Team extends React.Component {
         if (this.state.authenticated) {
 
             return (
-                <div>
+                <div className="element">
                     <NavbarC></NavbarC>
-                    <div className="element">
-                        <div className="title_team">
-                            <h1>Team: {this.team.full_name}</h1>
+                    <div className="element_body">
+                        <div className="body_element">
+                            <div className="text_element">
+                                <div className="title_element">
+                                    <h1>Team: <span style={{ fontFamily: this.team.abbreviation + 'Font' }}>{this.team.full_name}</span></h1>
+                                </div>
+                                <hr></hr>
+                                <div className="sub_element">
+                                    <h3>City: {this.team.city}</h3>
+                                    <h3>Name: {this.team.name}</h3>
+                                </div>
+                                <div className="info_element">
+                                    <h4>Abbreviation: {this.team.abbreviation}</h4>
+                                    <h4>Conference: {this.team.conference}</h4>
+                                    <h4>Division: {this.team.division}</h4>
+                                </div>
+                            </div>
                             <img className="img_team" alt="logo" src={this.logo}></img>
                         </div>
-
-                        <div className="sub_team">
-                            <h3>City: {this.team.city}</h3>
-                            <h3>Name: {this.team.name}</h3>
-                        </div>
-                        <div className="info_team">
-                            <h4>Abbreviation: {this.team.abbreviation}</h4>
-                            <h4>Conference: {this.team.conference}</h4>
-                            <h4>Division: {this.team.division}</h4>
-                        </div>
-
-
+                        <BackButton></BackButton>
                     </div>
-
                 </div>
             );
         }

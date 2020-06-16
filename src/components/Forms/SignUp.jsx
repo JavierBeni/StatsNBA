@@ -1,8 +1,8 @@
 import React from 'react'
 import Form from 'react-bootstrap/Form'
 
-function SignIn(props) {
-
+//Part of form in case of sign up.
+function SignUp(props) {
     return (
         <Form.Group>
             <Form.Group className="sign_in">
@@ -28,4 +28,4 @@ function SignIn(props) {
     );
 }
 
-export default SignIn;
+export default SignUp;

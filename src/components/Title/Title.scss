@@ -1,18 +1,19 @@
-.title_img {
+@mixin image {
     display: block;
-    margin: 0 auto 2% auto;
     padding: 1%;
-    width: 40%;
     background-color: white;
     border-radius: 25px;
+  }
+
+.title_img {
+    @include image;
+    margin: 0 auto 2% auto;
+    width: 40%;
 }
 
 .loading_img {
-    display: block;
+    @include image;
     margin: 5% auto auto auto;
-    padding: 1%;
-    background-color: white;
-    border-radius: 25px;
 }
 
 .back_img{

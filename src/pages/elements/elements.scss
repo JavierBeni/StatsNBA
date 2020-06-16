@@ -1,5 +1,20 @@
+@import "../../App.scss";
+@import "../../fonts.scss";
+
 .elements {
-    margin: 1%;
+    @include background_image;
 }
 
+.elements_body,
+Table {
+    padding: 1%;
+}
 
+.small_title {
+    padding-right: 2%;
+}
+
+.search_player {
+    @include center_order;
+    white-space: nowrap;
+}

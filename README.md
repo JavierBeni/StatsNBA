@@ -1,5 +1,10 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+This app was done to practice React.
+The user login and sign up is done with Firebase.
+
+Probably to make same thing, like a redirect, it is done by 2 different ways. Simply to try and practice with different opcions.
+
 ## Available Scripts
 
 In the project directory, you can run:

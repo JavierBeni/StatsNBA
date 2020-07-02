@@ -136,7 +136,7 @@ export class Games extends React.Component {
                                     {rows_players}
                                 </tbody>
                             </Table>
-                            Number of resutls: {rows_players.length}
+                            <h4>Number of resutls: <b>{rows_players.length}</b></h4>
                             <BackButton></BackButton>
                         </div>
                     </div>

@@ -171,7 +171,7 @@ export class Player extends React.Component {
                                 {rows_stats}
                             </tbody>
                         </Table>
-                        Number of resutls: {rows_stats.length}
+                        <h4>Number of resutls: <b>{rows_stats.length}</b></h4>
                         <BackButton></BackButton>
                     </div>
 

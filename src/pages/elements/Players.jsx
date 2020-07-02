@@ -132,8 +132,8 @@ export class Players extends React.Component {
                                 </tbody>
                             </Table>
                             <div>
-                                <p>Number of resutls: {rows_players.length}</p>
-                                <p>Leyend of the position: C=center; G=guard; F=forward</p>
+                                <h4>Number of resutls: <b>{rows_players.length}</b></h4>
+                                <h4>Leyend of the position: <b>C</b>=CENTER; <b>G</b>=GUARD; <b>F</b>=FORWARD</h4>
                             </div>
                         </div>
                         <BackButton></BackButton>
